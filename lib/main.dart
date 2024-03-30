@@ -1,12 +1,11 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:random_string/random_string.dart';
-import 'dart:io';
-import 'package:share/share.dart';
+
+
+//import 'package:share/share.dart';
 //import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
-import 'package:path_provider/path_provider.dart';
+
 import 'dart:math';
 
 void main() {
@@ -15,8 +14,8 @@ void main() {
 
 
 
-    runApp(PasswordApp());
-  }
+  runApp(const PasswordApp());
+}
 
 
 
@@ -24,19 +23,21 @@ void main() {
 
 
 Widget myLayoutWidget() {
-  return Padding(
+  return const Padding(
     padding: EdgeInsets.all(40.0),
-    // child: Text("Hello world!"),
+   
   );
 }
 
 class PasswordApp extends StatelessWidget {
+  const PasswordApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     //return padding();
     return MaterialApp(
 
-      title: 'pass tester',
+      title: 'Pass Tester',
       debugShowCheckedModeBanner: false,
 
       theme: ThemeData(
@@ -47,13 +48,15 @@ class PasswordApp extends StatelessWidget {
 
       ),
 
-      home: PasswordPage(),
+      home: const PasswordPage(),
 
     );
   }
 }
 
 class PasswordPage extends StatefulWidget {
+  const PasswordPage({super.key});
+
   @override
   _PasswordPageState createState() => _PasswordPageState();
 }
@@ -98,7 +101,7 @@ class _PasswordPageState extends State<PasswordPage> {
   String generateRandomPassword() {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()-_=+[{]}\\|;:\',<.>/?';
     final random = Random();
-    final StringBuilder = StringBuffer();
+    final StringBuffer StringBuilder = StringBuffer();
 
     for (var i = 0; i < 12; i++) {
       final index = random.nextInt(characters.length);
@@ -112,9 +115,10 @@ class _PasswordPageState extends State<PasswordPage> {
   void copyPassword() {
     Clipboard.setData(ClipboardData(text: password));
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Password copied to clipboard')),
+      const SnackBar(content: Text('Password copied to clipboard')),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +127,7 @@ class _PasswordPageState extends State<PasswordPage> {
       appBar: PreferredSize(
 
         //preferredSize: Size.fromHeight(50.40),
-        preferredSize: Size.fromHeight(kToolbarHeight),
+        preferredSize: const Size.fromHeight(kToolbarHeight),
         //maintainAnimation: true,
 
 
@@ -141,9 +145,9 @@ class _PasswordPageState extends State<PasswordPage> {
             width: 800.100,
             height: 70.0,
 
-            padding: EdgeInsets.only(top: 20.20,left: 150.40),
+            padding: const EdgeInsets.only(top: 20.20),
             //padding: EdgeInsets.only(right: 20.40),// ازاحة بالقيمة المطلوبة
-            child: Text('اختبار قوة كلمة المرور',
+            child: const Text('Password Tester',
               style: TextStyle(
 
                 fontWeight: FontWeight.bold,
@@ -164,7 +168,7 @@ class _PasswordPageState extends State<PasswordPage> {
 
       ),
 
-      drawer: Drawer(
+      drawer: const Drawer(
         elevation: 66.0,
         child: Column(
           children: <Widget>[
@@ -173,7 +177,7 @@ class _PasswordPageState extends State<PasswordPage> {
             UserAccountsDrawerHeader(
 
               accountName: Text(" "),
-              accountEmail: Text("Pass tester"),
+              accountEmail: Text("password Tester"),
               decoration: BoxDecoration(
 
                 color: Colors.cyan, // Set the desired background color
@@ -193,35 +197,35 @@ class _PasswordPageState extends State<PasswordPage> {
               ],
             ),
             ListTile(
-              title: new Text("حول"),
-              leading: new Icon(Icons.stacked_line_chart),
+              title: Text("حول"),
+              leading: Icon(Icons.stacked_line_chart),
             ),
             Divider(
               height: 0.1,
             ),
             ListTile(
-              title: new Text("مشاركة"),
-              leading: new Icon(Icons.share),
+              title:  Text("مشاركة"),
+              leading:  Icon(Icons.share),
             ),
             ListTile(
-              title: new Text("سوشال ميديا"),
-              leading: new Icon(Icons.people),
+              title: Text("سوشال ميديا"),
+              leading: Icon(Icons.people),
             ),
             ListTile(
-              title: new Text("تواصل"),
-              leading: new Icon(Icons.contact_mail),
+              title: Text("تواصل"),
+              leading: Icon(Icons.contact_mail),
             ),
             ListTile(
-              title: new Text("اعدادات"),
-              leading: new Icon(Icons.settings),
+              title: Text("اعدادات"),
+              leading: Icon(Icons.settings),
             )
           ],
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
 
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('image/s.jpg'),
             fit: BoxFit.fill,
@@ -232,7 +236,7 @@ class _PasswordPageState extends State<PasswordPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            Text(
+            const Text(
 
 
               'Password Security Information:',
@@ -245,9 +249,9 @@ class _PasswordPageState extends State<PasswordPage> {
             ),
 
 
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
 
-            Text(' -  تعتبر كلمة المرور من اهم وسائل حماية الاشياء الخاصة سواً الحسابات الالكترونية او الاجهزة .' ,
+            const Text(' -  تعتبر كلمة المرور من اهم وسائل حماية الاشياء الخاصة سواءً الحسابات الالكترونية او الاجهزة .' ,
 
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -258,8 +262,10 @@ class _PasswordPageState extends State<PasswordPage> {
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
             ),
-            SizedBox(height: 10.0),
-            Text(' -  عند اخيارك لكلمة المرور يجيب عليك مراعاة عدم استخدام ملعوماتك الشخصية .  ',
+            const SizedBox(height: 10.0),
+
+            const SizedBox(height: 10.0),
+            const Text(' -  يمكنك استخدام خليط من حروف وارقام ورمز وبطول اكبر 8 للتمكن من الحصول على كلمة مرور قوية ,   ',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15.5,
@@ -268,25 +274,65 @@ class _PasswordPageState extends State<PasswordPage> {
               ),
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
-            ),
-            SizedBox(height: 10.0),
-            Text(' -  يمكنك استخدام خليط من حروف وارقام ورمز وبطول اكبر 8 للتمكن من الحصول على كلمة مرور قوية ,   ',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15.5,
-                color: Colors.white,
 
+            ),
+
+
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
               ),
-              textDirection: TextDirection.rtl,
-              textAlign: TextAlign.right,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('معلومات حول اختيار كلمة المرور '),
+                      content: const Text('  \nلإنشاء كلمة مرور قوية، يجب أن تتضمن بعض الخصائص الهامة التي تجعلها صعبة التخمين. هذه الخصائص تشمل:'
+                          '  1. طول الكلمة المرورية: يجب أن تكون كلمة المرور على الأقل 12 حرفًا على الأقل، وكلما زاد طولها كلما زادت قوتها.\n'
+                        '2. الاستخدام المتنوع للأحرف: يجب أن تحتوي كلمة المرور على مزيج من الأحرف الكبيرة والصغيرة والأرقام والرموز الخاصة مثل ! و @ و # و  وغيرها                                 '
+                        '   3. عدم استخدام المعلومات الشخصية: يجب تجنب استخدام معلومات شخصية سهلة التوقع مثل اسم المستخدم أو تاريخ الميلاد في كلمة المرور.                         '
+                        '4. الاستخدام المبتكر للكلمات: يمكن استخدام عبارات تكون صعبة التخمين ولكنها معروفة لديك بسهولة. مثلاً، جملة طويلة وغير منطقية تحتوي على مزيج من الحروف والأرقام والرموز.',
+
+
+
+                        textAlign: TextAlign.right,
+                        textDirection: TextDirection.rtl,
+                      ),
+
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+
+              },
+              child: const Text('للمزيد من المعلومات',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+
+
+                  fontSize: 18.0,
+                  color: Colors.white,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.white,
+                  decorationThickness: 3.0,
+
+                ),),
+
             ),
-
-
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             // IntputDecoration.collapsed(hintText:)
             //SizedBox(color:),
             //ColoredBox(color: Color)
-            Text(' Enter Password',
+            const Text(' Enter Password',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 23.0,
@@ -303,13 +349,13 @@ class _PasswordPageState extends State<PasswordPage> {
 
 
 
-          decoration: InputDecoration(
-              //  labelText: 'Enter Password',
+              decoration: const InputDecoration(
+                //  labelText: 'Enter Password',
                 prefixIcon: Icon(Icons.lock),
                 filled: true,
                 fillColor: Colors.white,
                 //hintText: generatePassword,
-            //textEditingController.clear(),
+                //textEditingController.clear(),
 
 
 
@@ -333,46 +379,46 @@ class _PasswordPageState extends State<PasswordPage> {
               },
 
             ),
-            SizedBox(height: 30.0),
+            const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Password Strength'),
+                      title: const Text('Password Strength'),
                       content: Text(passwordStrength),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                         child: const Text('OK'),
+    ),
+    ],
+    );
+    },
+    );
               },
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(Size(50, 40)),
-                fixedSize: MaterialStateProperty.all(Size(200, 20)),// تعيين الحجم المطلوب
+                minimumSize: MaterialStateProperty.all(const Size(50, 40)),
+                fixedSize: MaterialStateProperty.all(const Size(200, 20)),// تعيين الحجم المطلوب
               ),
-              child: Text('Test   Password'),
+              child: const Text('Test   Password'),
               //SizedBox(width: 20.0),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
 
             ElevatedButton(
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(Size(50, 40)),
-                fixedSize: MaterialStateProperty.all(Size(200, 20)),// تعيين الحجم المطلوب
+                minimumSize: MaterialStateProperty.all(const Size(50, 40)),
+                fixedSize: MaterialStateProperty.all(const Size(200, 20)),// تعيين الحجم المطلوب
               ),
 
               onPressed:() {
                 textEditingController.clear();
                 password=generateRandomPassword();
-               // password=generatePassword();
+                // password=generatePassword();
                 textEditingController.text= password;
 
 
@@ -380,9 +426,9 @@ class _PasswordPageState extends State<PasswordPage> {
 
 
 
-        child: Text('Generate Password',
+              child: const Text('Generate Password',
               ),
-               // textEditingController.clear();
+              // textEditingController.clear();
 
 
             ),
@@ -395,13 +441,13 @@ class _PasswordPageState extends State<PasswordPage> {
       ),
       floatingActionButton: FloatingActionButton(
           elevation: 20.0,
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: (){
             showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('copy password'),
+                  title: const Text('copy password'),
                   content: Text(password),
                   actions: [
                     TextButton(
@@ -409,24 +455,19 @@ class _PasswordPageState extends State<PasswordPage> {
                         Navigator.pop(context);
 
                       },
-                      child: Text('Close'),
+                      child: const Text('Close'),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     Visibility(
                       visible: password.isNotEmpty,
                       child: ElevatedButton(
                         onPressed: copyPassword,
-                        child: Text('Copy Password'),
+                        child: const Text('Copy Password'),
                       ),
                     ),
-                    SizedBox(height: 30.0),
+                    const SizedBox(height: 30.0),
                     //SizedBox()
-                    ElevatedButton(
-                      onPressed: generatePassword,
-                      child: Text('Save Password',
-                      ),
 
-                    ),
                   ],
 
                 );

@@ -1,4 +1,4 @@
-# pass_tester
+# pastester
 
 A new Flutter project.
 
