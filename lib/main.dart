@@ -1,12 +1,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pastester/hello.dart';
+
+import 'f.dart';
 
 
 //import 'package:share/share.dart';
 //import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 
 import 'dart:math';
+import 'ContactPage.dart';
+import 'homePage.dart';
+
 
 void main() {
 
@@ -48,7 +54,7 @@ class PasswordApp extends StatelessWidget {
 
       ),
 
-      home: const PasswordPage(),
+      home: MyApps(),
 
     );
   }
@@ -75,17 +81,26 @@ class _PasswordPageState extends State<PasswordPage> {
   }
 
   String validatePassword(String password) {
-    if (password.length > 8 && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
+    if ((password.length > 10 && password.length<=13) && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
+    {
+      return ' كلمة المرور جيدة ';
+    }
+    else if (password.length > 13  && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
     {
       return 'كلمة المرور قوية';
     }
-    else if (password.length > 8 && password.contains(RegExp(r'[0-9]'))  && password.contains(RegExp(r'[A-Za-z]'))  )
+
+    else if ((password.length > 1 && password.length<=7) && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
     {
-      return 'كلمة المرور متوسطة يمكنك اضافة رموز لتصبح كلمة المرور قوية';
+      return 'كلمة المرورضعيفة جداً';
+    }
+    else if ((password.length > 7 && password.length<=10) && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
+    {
+      return 'كلمة المرورضعيفة';
     }
     else
     {
-      return ' كلمة المرور ضعيفة يجب استخدام رموز وحرف وارقام لتصبح كلمة المرور قوية';
+      return ' يجب ادخال كلمة المرور تحتوي على حروف وارقام ورموز';
     }
 
   }
@@ -103,7 +118,7 @@ class _PasswordPageState extends State<PasswordPage> {
     final random = Random();
     final StringBuffer StringBuilder = StringBuffer();
 
-    for (var i = 0; i < 12; i++) {
+    for (var i = 0; i < 14; i++) {
       final index = random.nextInt(characters.length);
       StringBuilder.write(characters[index]);
     }
@@ -168,57 +183,86 @@ class _PasswordPageState extends State<PasswordPage> {
 
       ),
 
-      drawer: const Drawer(
-        elevation: 66.0,
-        child: Column(
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: <Widget>[
-
-
-            UserAccountsDrawerHeader(
-
-              accountName: Text(" "),
-              accountEmail: Text("password Tester"),
+            const DrawerHeader(
               decoration: BoxDecoration(
-
-                color: Colors.cyan, // Set the desired background color
+                color: Colors.blue,
               ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
 
+                  CircleAvatar(
 
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Text("xyz"),
-                //leading: new Icon(Icons.stacked_line_chart),
+                    radius: 30,
+                    child: Icon(
+                      Icons.person,
+                      size: 40,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Admin',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    'example@example.com',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
               ),
-              otherAccountsPictures: <Widget>[
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Text("abc"),
-                )
-              ],
             ),
             ListTile(
-              title: Text("حول"),
-              leading: Icon(Icons.stacked_line_chart),
-            ),
-            Divider(
-              height: 0.1,
-            ),
-            ListTile(
-              title:  Text("مشاركة"),
-              leading:  Icon(Icons.share),
-            ),
-            ListTile(
-              title: Text("سوشال ميديا"),
-              leading: Icon(Icons.people),
+              leading: const Icon(Icons.info),
+              title: const Text('حول'),
+              onTap: () {
+                Navigator.pop(context); // إغلاق الدراور
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
             ),
             ListTile(
-              title: Text("تواصل"),
-              leading: Icon(Icons.contact_mail),
+              leading: const Icon(Icons.call),
+              title: const Text('تواصل'),
+              onTap: () {
+                Navigator.pop(context); // إغلاق الدراور
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ContactPage()),
+                );
+              },
             ),
             ListTile(
-              title: Text("اعدادات"),
-              leading: Icon(Icons.settings),
-            )
+              leading: const Icon(Icons.policy),
+              title: const Text('سياسة الخصوصية'),
+              onTap: () {
+                Navigator.pop(context); // إغلاق الدراور
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PrivacyPolicyPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.exit_to_app),
+              title: const Text('خروج'),
+              onTap: () {
+                Navigator.pop(context); // إغلاق الدراور
+                // إغلاق التطبيق
+                Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+              },
+            ),
           ],
         ),
       ),
@@ -236,17 +280,7 @@ class _PasswordPageState extends State<PasswordPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            const Text(
-
-
-              'Password Security Information:',
-              style: TextStyle(
-
-                fontWeight: FontWeight.bold,
-                fontSize: 25.0,
-                color: Colors.cyan,
-              ),
-            ),
+            
 
 
             const SizedBox(height: 10.0),
@@ -255,7 +289,7 @@ class _PasswordPageState extends State<PasswordPage> {
 
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 15.5,
+                fontSize: 14.1,
                 color: Colors.white,
 
               ),
@@ -268,7 +302,7 @@ class _PasswordPageState extends State<PasswordPage> {
             const Text(' -  يمكنك استخدام خليط من حروف وارقام ورمز وبطول اكبر 8 للتمكن من الحصول على كلمة مرور قوية ,   ',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 15.5,
+                fontSize: 14.1,
                 color: Colors.white,
 
               ),
@@ -345,6 +379,7 @@ class _PasswordPageState extends State<PasswordPage> {
               obscureText: false,
               onChanged: checkPassword,
               controller: textEditingController,
+              //controller:
 
 
 
@@ -375,6 +410,7 @@ class _PasswordPageState extends State<PasswordPage> {
               onTap: () {
                 setState(() {
                   textEditingController.clear();
+
                 });
               },
 
