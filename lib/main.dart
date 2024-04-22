@@ -81,20 +81,20 @@ class _PasswordPageState extends State<PasswordPage> {
   }
 
   String validatePassword(String password) {
-    if ((password.length > 10 && password.length<=13) && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
+    if ((password.length > 8 && password.length<=11) && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
     {
-      return ' كلمة المرور جيدة ';
+      return ' كلمة المرور جيدة يجب ان تكون اطول من11 لتصبح قوية ';
     }
-    else if (password.length > 13  && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
+    else if (password.length > 11  && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
     {
       return 'كلمة المرور قوية';
     }
 
-    else if ((password.length > 1 && password.length<=7) && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
+    else if ((password.length > 1 && password.length<=5) && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
     {
       return 'كلمة المرورضعيفة جداً';
     }
-    else if ((password.length > 7 && password.length<=10) && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
+    else if ((password.length > 5 && password.length<=8) && password.contains(RegExp(r'[0-9]')) && password.contains(RegExp(r'[A-Za-z]')) && password.contains(RegExp(r'[!@#$%\^&\*\(\)]{1,}')))
     {
       return 'كلمة المرورضعيفة';
     }
@@ -118,7 +118,7 @@ class _PasswordPageState extends State<PasswordPage> {
     final random = Random();
     final StringBuffer StringBuilder = StringBuffer();
 
-    for (var i = 0; i < 14; i++) {
+    for (var i = 0; i < 16; i++) {
       final index = random.nextInt(characters.length);
       StringBuilder.write(characters[index]);
     }
@@ -141,49 +141,50 @@ class _PasswordPageState extends State<PasswordPage> {
 
       appBar: PreferredSize(
 
-        //preferredSize: Size.fromHeight(50.40),
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        //maintainAnimation: true,
-
-
-        // تعيين ارتفاع مخصص هنا
+        preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                iconSize: 50,
+                color: Colors.white,
+                icon: Icon(Icons.menu), // يمكنك تغيير الرمز هنا
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
+          ),
+          backgroundColor: Colors.cyan.shade600,
+          title: const Text(
+            'اختبار  كلمة المرور',
 
 
 
-          // padding: EdgeInsets.only(top: 20),
-          //title: const Text('اختبار كلمة المرور'),
 
+            style: TextStyle(
 
-          toolbarHeight: 90.0,
-          title: Container(
-            width: 800.100,
-            height: 70.0,
-
-            padding: const EdgeInsets.only(top: 20.20),
-            //padding: EdgeInsets.only(right: 20.40),// ازاحة بالقيمة المطلوبة
-            child: const Text('Password Tester',
-              style: TextStyle(
-
-                fontWeight: FontWeight.bold,
-                fontSize: 24.0,
-                color: Colors.black,
-              ),),
-
-          ) ,
-          // actions: [Text('A text')],
-
-          backgroundColor: Colors.cyan,
-          elevation: 10,
-          titleSpacing: 10,
-          //elevation: 0,
-          //padding: EdgeInsets.zero,
+              color: Colors.white,
+              fontSize: 28.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: "Roboto",
+            ),
+          ),
+          centerTitle: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(10),
+            ),
+          ),
+          elevation: 0.0,
         ),
 
 
       ),
 
-      endDrawer: Drawer(
+      drawer: Drawer(
+
+
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -299,7 +300,7 @@ class _PasswordPageState extends State<PasswordPage> {
             const SizedBox(height: 10.0),
 
             const SizedBox(height: 10.0),
-            const Text(' -  يمكنك استخدام خليط من حروف وارقام ورمز وبطول اكبر 8 للتمكن من الحصول على كلمة مرور قوية ,   ',
+            const Text(' -  يمكنك استخدام خليط من حروف وارقام ورمز وبطول اكبر11  للتمكن من الحصول على كلمة مرور قوية ,   ',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14.1,
@@ -322,17 +323,26 @@ class _PasswordPageState extends State<PasswordPage> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: const Text('معلومات حول اختيار كلمة المرور '),
+
                       content: const Text('  \nلإنشاء كلمة مرور قوية، يجب أن تتضمن بعض الخصائص الهامة التي تجعلها صعبة التخمين. هذه الخصائص تشمل:'
-                          '  1. طول الكلمة المرورية: يجب أن تكون كلمة المرور على الأقل 12 حرفًا على الأقل، وكلما زاد طولها كلما زادت قوتها.\n'
-                        '2. الاستخدام المتنوع للأحرف: يجب أن تحتوي كلمة المرور على مزيج من الأحرف الكبيرة والصغيرة والأرقام والرموز الخاصة مثل ! و @ و # و  وغيرها                                 '
-                        '   3. عدم استخدام المعلومات الشخصية: يجب تجنب استخدام معلومات شخصية سهلة التوقع مثل اسم المستخدم أو تاريخ الميلاد في كلمة المرور.                         '
+
+                          '  1. طول الكلمة المرورية: يجب أن تكون كلمة المرور على الأقل 12 حرف ورقم ورمز على الأقل، وكلما زاد طولها كلما زادت قوتها.\n'
+
+                        '2. الاستخدام المتنوع للأحرف: يجب أن تحتوي كلمة المرور على مزيج من الأحرف الكبيرة والصغيرة والأرقام والرموز الخاصة مثل ! و @ و # و  وغيرها                                \n '
+
+                          '   3. عدم استخدام المعلومات الشخصية: يجب تجنب استخدام معلومات شخصية سهلة التوقع مثل اسم المستخدم أو تاريخ الميلاد في كلمة المرور.                             \n'
                         '4. الاستخدام المبتكر للكلمات: يمكن استخدام عبارات تكون صعبة التخمين ولكنها معروفة لديك بسهولة. مثلاً، جملة طويلة وغير منطقية تحتوي على مزيج من الحروف والأرقام والرموز.',
 
 
 
                         textAlign: TextAlign.right,
                         textDirection: TextDirection.rtl,
-                      ),
+                    style: TextStyle(
+                      height: 2.5,
+                    fontWeight: FontWeight.bold,
+                    ),
+
+                    ),
 
                       actions: [
                         TextButton(
@@ -348,16 +358,18 @@ class _PasswordPageState extends State<PasswordPage> {
 
 
               },
-              child: const Text('للمزيد من المعلومات',
+              child: const Text('كيف تختار كلمة مرورك',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
 
 
-                  fontSize: 18.0,
+
+
+                  fontSize: 19.0,
                   color: Colors.white,
                   decoration: TextDecoration.underline,
                   decorationColor: Colors.white,
-                  decorationThickness: 3.0,
+                  decorationThickness: 2.0,
 
                 ),),
 
@@ -366,7 +378,7 @@ class _PasswordPageState extends State<PasswordPage> {
             // IntputDecoration.collapsed(hintText:)
             //SizedBox(color:),
             //ColoredBox(color: Color)
-            const Text(' Enter Password',
+            const Text(' ادخل كلمة المرور',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 23.0,
@@ -415,6 +427,7 @@ class _PasswordPageState extends State<PasswordPage> {
               },
 
             ),
+
             const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
@@ -440,7 +453,7 @@ class _PasswordPageState extends State<PasswordPage> {
                 minimumSize: MaterialStateProperty.all(const Size(50, 40)),
                 fixedSize: MaterialStateProperty.all(const Size(200, 20)),// تعيين الحجم المطلوب
               ),
-              child: const Text('Test   Password'),
+              child: const Text('فحص كلمة المرور'),
               //SizedBox(width: 20.0),
             ),
             const SizedBox(height: 20.0),
@@ -462,7 +475,7 @@ class _PasswordPageState extends State<PasswordPage> {
 
 
 
-              child: const Text('Generate Password',
+              child: const Text('اقتراح كلمة مرور',
               ),
               // textEditingController.clear();
 
@@ -477,8 +490,10 @@ class _PasswordPageState extends State<PasswordPage> {
       ),
       floatingActionButton: FloatingActionButton(
           elevation: 20.0,
-          child: const Icon(Icons.add),
-          onPressed: (){
+          child: const Icon(Icons.copy),
+          onPressed: (
+
+              ){
             showDialog(
               context: context,
               builder: (BuildContext context) {

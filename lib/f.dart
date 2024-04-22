@@ -13,11 +13,11 @@ class PrivacyPolicyPage extends StatelessWidget {
         appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
     child: AppBar(
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.cyan.shade600,
     title: const Text(
     'السياسة و الخصوصية',
     style: TextStyle(
-    color: Colors.blue,
+    color: Colors.white,
     fontSize: 30.0,
     fontWeight: FontWeight.bold,
     fontFamily: "Roboto",
@@ -88,7 +88,7 @@ class PrivacyPolicyPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'نحن طلاب قسم CYBER SECURITY في المعهد القدرات العالي للتدريب نقدم لكم هذا التطبيق Pass Tester بإشراف الاستاذة الفاضلة: مروى العطاس.',
+              'نحن طلاب قسم CYBER SECURITY في معهد القدرات الادارية العالي للتدريب نقدم لكم تطبيق Pass Tester بإشراف الاستاذة الفاضلة: مروى العطاس.',
               textAlign: TextAlign.right,
               textDirection: TextDirection.rtl,
               style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,),

@@ -1,34 +1,130 @@
 import 'package:flutter/material.dart';
 import 'package:pastester/main.dart';
+import 'f.dart';
+import 'ContactPage.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 50.0,
-        title: Container(
-          width: 800.100,
-          height: 50.0,
-
-          //padding: const EdgeInsets.only(top: 20.20),
-          //padding: EdgeInsets.only(right: 20.40),// ازاحة بالقيمة المطلوبة
-          child: const Text('Password Tester',
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70.0),
+        child: AppBar(
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                iconSize: 50,
+                color: Colors.white,
+                icon: Icon(Icons.menu), // يمكنك تغيير الرمز هنا
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
+          ),
+          backgroundColor: Colors.cyan.shade600,
+          title: const Text(
+            'معلومات عامة',
             style: TextStyle(
 
+              color: Colors.white,
+              fontSize: 28.0,
               fontWeight: FontWeight.bold,
-              fontSize: 24.0,
-              color: Colors.black,
-            ),),
+              fontFamily: "Roboto",
+            ),
+          ),
+          centerTitle: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20),
+            ),
+          ),
+          elevation: 0.0,
+        ),
+      ),
+      drawer: Drawer(
 
-        ) ,
-        // actions: [Text('A text')],
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
 
-        backgroundColor: Colors.cyan,
-        elevation: 10,
-        titleSpacing: 10,
-        //elevation: 0,
-        //padding: EdgeInsets.zero,
+                  CircleAvatar(
+
+                    radius: 30,
+                    child: Icon(
+                      Icons.person,
+                      size: 40,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Admin',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    'example@example.com',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text('حول'),
+              onTap: () {
+                Navigator.pop(context); // إغلاق الدراور
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.call),
+              title: const Text('تواصل'),
+              onTap: () {
+                Navigator.pop(context); // إغلاق الدراور
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ContactPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.policy),
+              title: const Text('سياسة الخصوصية'),
+              onTap: () {
+                Navigator.pop(context); // إغلاق الدراور
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PrivacyPolicyPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.exit_to_app),
+              title: const Text('خروج'),
+              onTap: () {
+                Navigator.pop(context); // إغلاق الدراور
+                // إغلاق التطبيق
+                Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+              },
+            ),
+          ],
+        ),
       ),
       body: Padding(
           padding: EdgeInsets.all(16.0),

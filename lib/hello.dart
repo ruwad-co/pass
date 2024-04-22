@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'g.dart';
+import 'main.dart';
 void main() {
   runApp(MyApps());
 }
@@ -23,15 +23,22 @@ class MyApps extends StatelessWidget {
 class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 5), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => PasswordPage(),
+        ),
+      );
+    });
     return Scaffold(
         appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
     child: AppBar(
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.cyan.shade600,
     title: const Text(
     'Pass Tester',
     style: TextStyle(
-    color: Colors.blue,
+    color: Colors.white,
     fontSize: 28.0,
     fontWeight: FontWeight.bold,
     fontFamily: "Roboto",
@@ -76,17 +83,6 @@ class WelcomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage(),
-                  ),
-                );
-              },
-              child: const Text('ابدأ'),
-            ),
           ],
         ),
       ),
